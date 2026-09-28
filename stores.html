@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shopify stores — Amr Hany</title>
+<meta name="description" content="Nine Shopify stores built or rebuilt: product pages, bundles, stock urgency and mobile-first storefronts.">
+<meta property="og:title" content="Shopify stores — Amr Hany">
+<meta property="og:description" content="Nine Shopify stores built or rebuilt: product pages, bundles, stock urgency and mobile-first storefronts.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Manrope:wght@400;500;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap head">
+    <a class="brandmark" href="index.html">Amr Hany</a>
+    <nav>
+      <ul>
+        <li><a href="index.html" data-i18n="nav0">Home</a></li>
+        <li><a href="media-buying.html" data-i18n="nav2">Ad results</a></li>
+        <li><a href="stores.html" data-i18n="nav3" class="on">Shopify stores</a></li>
+        <li><a href="index.html#services" data-i18n="nav1">Services</a></li>
+        <li><a href="index.html#contact" data-i18n="nav5">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="head-right">
+      <button id="lang" onclick="setLang(document.documentElement.lang==='en'?'ar':'en')">العربية</button>
+      <a class="btn btn-gold" href="https://wa.me/201028477893" data-i18n="cta1">Book a call</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <section class="page-head" style="padding-top:clamp(26px,4vw,48px)">
+    <span class="pill" data-i18n="role">Performance media buyer &amp; Shopify developer</span>
+    <h1 data-i18n="stHeadTitle">Shopify stores</h1>
+    <p data-i18n="stHeadSub">Nine stores I built or rebuilt. Scroll inside any screen to see the whole page, top to bottom.</p>
+  </section>
+
+  <section id="stores" style="padding-top:44px">
+    <div class="sec-head">
+      <h2 data-i18n="stTitle">Shopify stores I built</h2>
+      <p data-i18n="stSub">Drag inside the phone screen to look around. Leave it alone and it keeps scrolling on its own.</p>
+    </div>
+    <div id="storeList"></div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div>
+      <h2 data-i18n="coTitle">Ready to grow your store?</h2>
+      <p data-i18n="coBody">Send me your store link and your current numbers. I will tell you honestly whether I can help, and how.</p>
+    </div>
+    <div class="lines">
+      <a href="https://wa.me/201028477893">WhatsApp: 010 2847 7893</a>
+      <a class="alt" href="mailto:Hamr44136@gmail.com">Hamr44136@gmail.com</a>
+      <div class="socials">
+        <a href="https://instagram.com/amrhany_10">Instagram</a>
+        <a href="https://facebook.com/amrhany00">Facebook</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Amr Hany</span>
+    <span data-i18n="foot">Performance media buyer &amp; Shopify developer — Cairo, Egypt</span>
+  </footer>
+
+</div>
+</main>
+
+<div class="wa-wrap">
+  <div class="wa-bubble" data-i18n="waBubble">Ready to grow your store? Send me a message 👋</div>
+  <a class="wa" href="https://wa.me/201028477893" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <i><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.03c-.25.7-1.45 1.34-2 1.4-.55.06-1.07.08-1.84-.12-.46-.12-1.06-.32-1.83-.65-2.7-1.17-4.46-3.9-4.6-4.08-.13-.18-1.1-1.46-1.1-2.79 0-1.32.69-1.97.94-2.24.25-.27.54-.34.73-.34.18 0 .37 0 .53.01.17.01.4-.06.62.48.23.55.78 1.9.85 2.04.07.14.11.3.02.48-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.57.16.27.7 1.16 1.51 1.88 1.04.93 1.91 1.22 2.18 1.36.27.14.43.12.59-.07.16-.19.68-.79.86-1.06.18-.27.37-.23.62-.14.25.09 1.6.75 1.87.89.27.14.46.2.53.32.07.11.07.66-.18 1.36z"/></svg></i>
+    <span data-i18n="waBtn">Message me — let's grow together 🔥</span>
+  </a>
+</div>
+
+<div id="lb" role="dialog" aria-modal="true"><button aria-label="Close" onclick="closeLb()">×</button><img id="lbImg" alt=""></div>
+<script src="assets/site.js"></script>
+
+</body>
+</html>
