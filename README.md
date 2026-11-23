@@ -1,44 +1,41 @@
-# Amr Hany — Portfolio
+# عمرو هاني — البورتفوليو
 
-Static site, three pages. No build step, no dependencies.
+موقع ثابت، تلات صفحات. مفيش build ولا مكتبات.
 
 ```
-index.html          home: hero, stats, services, process, contact
-media-buying.html   ad case studies + messaging campaigns
-stores.html         Shopify stores with scrollable phone mockups
-assets/site.css     all styling
-assets/site.js      all content, both languages, effects
-assets/img/         screenshots
+index.html          الرئيسية: الهيرو، النتيجة المتحركة، الخدمات، بنشتغل إزاي، التوافق، الأسئلة
+media-buying.html   كيس ستاديز الإعلانات + حملات الرسايل
+stores.html         كروت كيس ستادي لمتاجر شوبيفاي
+assets/site.css     كل التنسيق
+assets/site.js      كل الكلام والأرقام والمؤثرات
+assets/img/         الصور
 ```
 
-## Publish with GitHub Pages
-Settings → Pages → Source: Deploy from a branch → Branch: `main` + `/ (root)` → Save.
+## النشر على GitHub Pages
+Settings ← Pages ← Source: Deploy from a branch ← Branch: `main` + `/ (root)` ← Save.
 
-## Publish on Hostinger
-Upload everything into `public_html`, keeping `assets/` next to the HTML files.
+## النشر على Hostinger
+ارفع كل الملفات في `public_html`، وخلي `assets/` جنب ملفات الـ HTML.
 
-## Edit the colours
-Top of `assets/site.css`:
+## تغيير الألوان
+في أول `assets/site.css`:
 
 ```css
---wine:#6E1420;    /* dark burgundy blocks */
---cream:#F7EFE0;   /* page background */
---mustard:#F2B32C; /* buttons and highlights */
+--wine:#6E1420;    /* البلوكات النبيتي الغامق */
+--cream:#F7EFE0;   /* خلفية الصفحة */
+--mustard:#F2B32C; /* الأزرار والأرقام */
 ```
 
-## Edit the text
-Everything lives in `assets/site.js`:
-- `CASES` — ad case studies
-- `MSGS` — messaging campaign cards
-- `STORES` — Shopify projects (screens, tags, feature list)
-- `T.ar` — the Arabic copy. English copy sits in the HTML files.
+## تغيير الكلام والأرقام
+كله في `assets/site.js` في أول الملف:
+- `HIGHLIGHTS` — النتيجة الكبيرة اللي بتتغير مع كل فتحة للصفحة
+- `CASES` — كيس ستاديز الإعلانات
+- `MSGS` — كروت حملات الرسايل
+- `PROJECTS` — المتاجر (المشكلة · عملت إيه · النتيجة · الصور)
 
-## The phone mockups
-Rebuild projects show two phones side by side, labelled BEFORE and AFTER above
-the screens. Projects built from scratch show one phone labelled BUILT BY ME.
+الكلام الثابت (الخدمات، بنشتغل إزاي، الأسئلة) موجود في `index.html` مباشرة.
 
-Each screen scrolls on its own and the visitor can drag inside it. Touching it
-pauses the auto-scroll for a couple of seconds, then it resumes. The ⤢ button
-opens the full screenshot.
-
-Screens live in `assets/img` as `<project>-before.jpg` / `<project>-after.jpg`.
+## إزاي الصور بتتعرض
+كل متجر كارت فيه صورة واحدة + المشكلة وعملت إيه والنتيجة، وزرار "شوف الصفحات كاملة"
+بيفتح الصفحة كلها في لايت بوكس بأسهم للتنقل بين الصفحات. ومعاه زرار
+"شوف النسخة القديمة" للمتاجر اللي فيها إعادة بناء.
