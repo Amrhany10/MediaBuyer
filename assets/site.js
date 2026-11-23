@@ -1,405 +1,294 @@
 /* ============================================================
-   CONTENT + BEHAVIOUR — shared by every page
+   كل الكلام والأرقام في الملف ده — عدّل هنا والموقع كله يتغير
    ============================================================ */
 
-/* ---------- ad cases: each entry is one campaign / one period ---------- */
+/* (ب) النتيجة الكبيرة اللي بتتغير مع كل فتحة للصفحة */
+const HIGHLIGHTS = [
+  { fig:'4.64', unit:'مليون جنيه',
+    what:'مبيعات لبراند فاشون في شهر واحد',
+    meta:'بإنفاق إعلاني 350.8 ألف  ·  عائد 13.2 ضعف  ·  6,005 أوردر' },
+  { fig:'2.57', unit:'مليون جنيه',
+    what:'مبيعات لبراند فاشون في شهر واحد',
+    meta:'بإنفاق إعلاني 224 ألف  ·  عائد 11.5 ضعف  ·  3,914 أوردر' },
+  { fig:'27.8', unit:'ضعف عائد',
+    what:'أعلى عائد على الإنفاق في يوم واحد',
+    meta:'4.1 ألف جنيه رجّعوا 114.6 ألف  ·  تحويل المتجر 4.25%' },
+  { fig:'1.21', unit:'مليون جنيه',
+    what:'مبيعات في 9 أيام لبراند فاشون',
+    meta:'بإنفاق 68.5 ألف  ·  عائد 17.7 ضعف  ·  1,300 أوردر' },
+  { fig:'1.59', unit:'مليون جنيه',
+    what:'مبيعات متجر في 3 أسابيع',
+    meta:'1,763 أوردر  ·  الأوردرات زادت 215%  ·  الزيارات زادت 157%' }
+];
+
+/* كيس ستادي الإعلانات — كل كارت حملة أو فترة لوحدها */
 const CASES = [
-  { dark:true,
-    tag:{en:'Fashion brand',ar:'براند فاشون'},
-    per:{en:'June 2026',ar:'يونيو ٢٠٢٦'},
-    title:{en:'13.2x ROAS on a 350K EGP month',ar:'ROAS ١٣.٢ في شهر بـ ٣٥٠ ألف'},
-    body:{en:'350.8K EGP spent, 4.64M EGP back, 6,005 purchases at 58 EGP each. The store itself reported 4.88M EGP that month.',
-          ar:'صرفت ٣٥٠.٨ ألف ورجعوا ٤.٦٤ مليون، ٦٠٠٥ أوردر بـ ٥٨ جنيه للأوردر. والمتجر نفسه سجّل ٤.٨٨ مليون في الشهر.'},
-    kpis:[['13.2x',{en:'ROAS',ar:'ROAS'}],['4.64M',{en:'EGP revenue',ar:'جنيه مبيعات'}],['6,005',{en:'Purchases',ar:'أوردر'}],['58',{en:'EGP per purchase',ar:'جنيه للأوردر'}]],
+  { dark:true, tag:'براند فاشون', per:'يونيو 2026',
+    title:'عائد 13.2 ضعف في شهر بإنفاق 350 ألف',
+    body:'صرفت 350.8 ألف جنيه ورجعوا 4.64 مليون، 6,005 أوردر بـ 58 جنيه للأوردر. والمتجر نفسه سجّل 4.88 مليون في نفس الشهر.',
+    kpis:[['13.2x','عائد على الإنفاق'],['4.64M','جنيه مبيعات'],['6,005','أوردر'],['58','جنيه للأوردر']],
     shots:['ads-june-meta.jpg','ads-june-store.jpg'] },
 
-  { dark:false,
-    tag:{en:'Fashion brand',ar:'براند فاشون'},
-    per:{en:'One day',ar:'يوم واحد'},
-    title:{en:'27.8x ROAS in a single day',ar:'ROAS ٢٧.٨ في يوم واحد'},
-    body:{en:'4.1K EGP spent that day brought 114.6K EGP back. The store dashboard for the same day shows 111 orders at a 4.25% conversion rate.',
-          ar:'صرفت ٤.١ ألف جنيه في اليوم ورجعوا ١١٤.٦ ألف. ولوحة المتجر في نفس اليوم بتقول ١١١ أوردر ومعدل تحويل ٤.٢٥٪.'},
-    kpis:[['27.8x',{en:'ROAS',ar:'ROAS'}],['114.6K',{en:'EGP revenue',ar:'جنيه مبيعات'}],['125',{en:'Purchases',ar:'أوردر'}],['4.25%',{en:'Store CVR',ar:'تحويل المتجر'}]],
+  { dark:false, tag:'براند فاشون', per:'يوم واحد',
+    title:'عائد 27.8 ضعف في يوم واحد',
+    body:'صرفت 4.1 ألف جنيه في اليوم ورجعوا 114.6 ألف. ولوحة المتجر في نفس اليوم بتقول 111 أوردر ومعدل تحويل 4.25%.',
+    kpis:[['27.8x','عائد على الإنفاق'],['114.6K','جنيه مبيعات'],['125','أوردر'],['4.25%','تحويل المتجر']],
     shots:['ads-day-meta.jpg','ads-day-store.jpg'] },
 
-  { dark:false,
-    tag:{en:'Fashion brand',ar:'براند فاشون'},
-    per:{en:'One day · 3 campaigns',ar:'يوم واحد · ٣ حملات'},
-    title:{en:'18.3x ROAS across three campaigns',ar:'ROAS ١٨.٣ على تلات حملات'},
-    body:{en:'Three campaigns running together in one day: 12K EGP spent, 219.4K EGP back, 218 purchases at 55 EGP each. The best of the three hit 20.9x.',
-          ar:'تلات حملات شغالة مع بعض في يوم: صرفت ١٢ ألف ورجعوا ٢١٩.٤ ألف، ٢١٨ أوردر بـ ٥٥ جنيه للأوردر. وأحسن حملة فيهم وصلت ٢٠.٩.'},
-    kpis:[['18.3x',{en:'ROAS',ar:'ROAS'}],['219.4K',{en:'EGP revenue',ar:'جنيه مبيعات'}],['218',{en:'Purchases',ar:'أوردر'}],['55',{en:'EGP per purchase',ar:'جنيه للأوردر'}]],
+  { dark:false, tag:'براند فاشون', per:'يوم واحد · 3 حملات',
+    title:'عائد 18.3 ضعف على تلات حملات',
+    body:'تلات حملات شغالة مع بعض في يوم: صرفت 12 ألف ورجعوا 219.4 ألف، 218 أوردر بـ 55 جنيه للأوردر. وأحسن حملة فيهم وصلت 20.9.',
+    kpis:[['18.3x','عائد على الإنفاق'],['219.4K','جنيه مبيعات'],['218','أوردر'],['55','جنيه للأوردر']],
     shots:['ads-3campaigns.jpg'] },
 
-  { dark:true,
-    tag:{en:'Fashion brand',ar:'براند فاشون'},
-    per:{en:'27 May – 4 Jun',ar:'٢٧ مايو – ٤ يونيو'},
-    title:{en:'17.7x ROAS over nine days',ar:'ROAS ١٧.٧ في ٩ أيام'},
-    body:{en:'68.5K EGP spent, 1.21M EGP back, 1,300 purchases. Individual ad sets in the same window ran between 11x and 77x.',
-          ar:'صرفت ٦٨.٥ ألف ورجعوا ١.٢١ مليون، و١٣٠٠ أوردر. والأدسِتس لوحدها في نفس الفترة كانت بين ١١ و٧٧.'},
-    kpis:[['17.7x',{en:'ROAS',ar:'ROAS'}],['1.21M',{en:'EGP revenue',ar:'جنيه مبيعات'}],['1,300',{en:'Purchases',ar:'أوردر'}],['53',{en:'EGP per purchase',ar:'جنيه للأوردر'}]],
+  { dark:true, tag:'براند فاشون', per:'27 مايو – 4 يونيو',
+    title:'عائد 17.7 ضعف في 9 أيام',
+    body:'صرفت 68.5 ألف ورجعوا 1.21 مليون، و1,300 أوردر. والأدسِتس لوحدها في نفس الفترة كانت بين 11 و77 ضعف.',
+    kpis:[['17.7x','عائد على الإنفاق'],['1.21M','جنيه مبيعات'],['1,300','أوردر'],['53','جنيه للأوردر']],
     shots:['ads-9days.jpg'] },
 
-  { dark:true,
-    tag:{en:'Fashion brand',ar:'براند فاشون'},
-    per:{en:'One day · whole account',ar:'يوم واحد · الحساب كله'},
-    title:{en:'13.5x ROAS on a full account day',ar:'ROAS ١٣.٥ على الحساب كله في يوم'},
-    body:{en:'15K EGP spent across the account in one day, 203.8K EGP back, 234 purchases. The store logged 230 orders and 231.4K EGP the same day — the two match.',
-          ar:'صرفت ١٥ ألف على الحساب كله في يوم ورجعوا ٢٠٣.٨ ألف، ٢٣٤ أوردر. والمتجر سجّل ٢٣٠ أوردر و٢٣١.٤ ألف في نفس اليوم — الرقمين مطابقين.'},
-    kpis:[['13.5x',{en:'ROAS',ar:'ROAS'}],['203.8K',{en:'EGP revenue',ar:'جنيه مبيعات'}],['234',{en:'Purchases',ar:'أوردر'}],['230',{en:'Store orders',ar:'أوردر في المتجر'}]],
+  { dark:true, tag:'براند فاشون', per:'يوم واحد · الحساب كله',
+    title:'عائد 13.5 ضعف على الحساب كله في يوم',
+    body:'صرفت 15 ألف على الحساب كله في يوم ورجعوا 203.8 ألف، 234 أوردر. والمتجر سجّل 230 أوردر و231.4 ألف في نفس اليوم — الرقمين مطابقين.',
+    kpis:[['13.5x','عائد على الإنفاق'],['203.8K','جنيه مبيعات'],['234','أوردر'],['230','أوردر في المتجر']],
     shots:['ads-account-day.jpg','ads-store-day.jpg'] },
 
-  { dark:false,
-    tag:{en:'Fashion brand',ar:'براند فاشون'},
-    per:{en:'August 2026',ar:'أغسطس ٢٠٢٦'},
-    title:{en:'11.5x ROAS with conversion up 52%',ar:'ROAS ١١.٥ والتحويل زاد ٥٢٪'},
-    body:{en:'224K EGP spent, 2.57M EGP back, 3,914 purchases. Store side: 2.66M EGP, 3,759 orders, and a conversion rate of 3.63% — up 52% on the month before.',
-          ar:'صرفت ٢٢٤ ألف ورجعوا ٢.٥٧ مليون، ٣٩١٤ أوردر. وفي المتجر: ٢.٦٦ مليون و٣٧٥٩ أوردر ومعدل تحويل ٣.٦٣٪ — بزيادة ٥٢٪ عن الشهر اللي قبله.'},
-    kpis:[['11.5x',{en:'ROAS',ar:'ROAS'}],['2.57M',{en:'EGP revenue',ar:'جنيه مبيعات'}],['3,914',{en:'Purchases',ar:'أوردر'}],['3.63%',{en:'Store CVR',ar:'تحويل المتجر'}]],
+  { dark:false, tag:'براند فاشون', per:'أغسطس 2026',
+    title:'عائد 11.5 ضعف والتحويل زاد 52%',
+    body:'صرفت 224 ألف ورجعوا 2.57 مليون، 3,914 أوردر. وفي المتجر: 2.66 مليون و3,759 أوردر ومعدل تحويل 3.63% — بزيادة 52% عن الشهر اللي قبله.',
+    kpis:[['11.5x','عائد على الإنفاق'],['2.57M','جنيه مبيعات'],['3,914','أوردر'],['3.63%','تحويل المتجر']],
     shots:['ads-august-meta.jpg','ads-august-store.jpg'] },
 
-  { dark:false,
-    tag:{en:'Cosmetics brand',ar:'براند كوزماتكس'},
-    per:{en:'20 Jul – 27 Sep',ar:'٢٠ يوليو – ٢٧ سبتمبر'},
-    title:{en:'9.5x ROAS and conversion up 225%',ar:'ROAS ٩.٥ والتحويل زاد ٢٢٥٪'},
-    body:{en:'One campaign over two months: 29.9K EGP spent, 283.4K EGP back, 175 purchases at 171 EGP each. Average order value on Meta matched the store almost exactly (1,619 vs 1,622 EGP).',
-          ar:'حملة واحدة على شهرين: صرفت ٢٩.٩ ألف ورجعوا ٢٨٣.٤ ألف، ١٧٥ أوردر بـ ١٧١ جنيه. ومتوسط قيمة الأوردر طلع زي المتجر تقريبًا بالظبط (١٦١٩ مقابل ١٦٢٢ جنيه).'},
-    kpis:[['9.5x',{en:'ROAS',ar:'ROAS'}],['283.4K',{en:'EGP revenue',ar:'جنيه مبيعات'}],['175',{en:'Purchases',ar:'أوردر'}],['+225%',{en:'Store CVR',ar:'تحويل المتجر'}]],
+  { dark:false, tag:'براند كوزماتكس', per:'20 يوليو – 27 سبتمبر',
+    title:'عائد 9.5 ضعف والتحويل زاد 225%',
+    body:'حملة واحدة على شهرين: صرفت 29.9 ألف ورجعوا 283.4 ألف، 175 أوردر بـ 171 جنيه. ومتوسط قيمة الأوردر طلع زي المتجر تقريبًا بالظبط (1,619 مقابل 1,622 جنيه).',
+    kpis:[['9.5x','عائد على الإنفاق'],['283.4K','جنيه مبيعات'],['175','أوردر'],['+225%','تحويل المتجر']],
     shots:['ads-cosmetics-meta.jpg','ads-cosmetics-store.jpg'] },
 
-  { dark:true,
-    tag:{en:'Fashion brand',ar:'براند فاشون'},
-    per:{en:'8 – 31 May 2026',ar:'٨ – ٣١ مايو ٢٠٢٦'},
-    title:{en:'Store sales up 136% in three weeks',ar:'مبيعات المتجر زادت ١٣٦٪ في ٣ أسابيع'},
-    body:{en:'Store dashboard only: 1.59M EGP in sales, 1,763 orders and 51.1K sessions — orders up 215% and traffic up 157% against the previous period.',
-          ar:'من لوحة المتجر: ١.٥٩ مليون جنيه مبيعات، ١٧٦٣ أوردر، و٥١.١ ألف زيارة — الأوردرات زادت ٢١٥٪ والزيارات ١٥٧٪ عن الفترة اللي قبلها.'},
-    kpis:[['1.59M',{en:'EGP sales',ar:'جنيه مبيعات'}],['1,763',{en:'Orders',ar:'أوردر'}],['+215%',{en:'Orders growth',ar:'نمو الأوردرات'}],['51.1K',{en:'Sessions',ar:'زيارة'}]],
+  { dark:true, tag:'براند فاشون', per:'8 – 31 مايو 2026',
+    title:'مبيعات المتجر زادت 136% في 3 أسابيع',
+    body:'من لوحة المتجر: 1.59 مليون جنيه مبيعات، 1,763 أوردر، و51.1 ألف زيارة — الأوردرات زادت 215% والزيارات 157% عن الفترة اللي قبلها.',
+    kpis:[['1.59M','جنيه مبيعات'],['1,763','أوردر'],['+215%','نمو الأوردرات'],['51.1K','زيارة']],
     shots:['ads-may-store.jpg'] }
 ];
 
-/* ---------- messaging campaigns ---------- */
+/* حملات الرسايل */
 const MSGS = [
-  { img:'msg-01_fabric_store_en.jpg', t:{en:'Fabric shop',ar:'محل أقمشة'}, s:{en:'85K EGP revenue on 8.7K spend — shipped orders only',ar:'٨٥ ألف مبيعات بـ ٨.٧ ألف إنفاق — أوردرات الشحن بس'} },
-  { img:'msg-10_appliance_repair_summary.jpg', t:{en:'Appliance repair',ar:'صيانة أجهزة'}, s:{en:'5,571 conversations at 17 EGP each',ar:'٥٥٧١ محادثة بـ ١٧ جنيه للمحادثة'} },
-  { img:'msg-09_weight_loss_a.jpg', t:{en:'Weight-loss clinic',ar:'مركز تخسيس'}, s:{en:'4,882 conversations across 1.5M impressions',ar:'٤٨٨٢ محادثة على ١.٥ مليون ظهور'} },
-  { img:'msg-02_steel_factory_b2b.jpg', t:{en:'Steel factory (B2B)',ar:'مصنع حديد'}, s:{en:'1,237 enquiries from traders and contractors',ar:'١٢٣٧ استفسار من تجار ومقاولين'} },
-  { img:'msg-08_wedding_venue.jpg', t:{en:'Wedding venue',ar:'قاعة أفراح'}, s:{en:'440+ conversations, CTR up to 15.8%',ar:'أكتر من ٤٤٠ محادثة ونسبة نقر لحد ١٥.٨٪'} },
-  { img:'msg-06_swimming_academy.jpg', t:{en:'Swimming academy',ar:'أكاديمية سباحة'}, s:{en:'600+ conversations, CTR up to 10.3%',ar:'أكتر من ٦٠٠ محادثة ونسبة نقر لحد ١٠.٣٪'} },
-  { img:'msg-05_baby_beds.jpg', t:{en:'Baby beds',ar:'سراير أطفال'}, s:{en:'834 conversations at 3.40 EGP each',ar:'٨٣٤ محادثة بـ ٣.٤٠ جنيه للمحادثة'} },
-  { img:'msg-03_medical_lab.jpg', t:{en:'Medical lab',ar:'معمل تحاليل'}, s:{en:'562 conversations at 11.1 EGP each',ar:'٥٦٢ محادثة بـ ١١.١ جنيه للمحادثة'} },
-  { img:'msg-11_gym.jpg', t:{en:'Gym',ar:'جيم'}, s:{en:'355 conversations, CTR up to 10.2%',ar:'٣٥٥ محادثة ونسبة نقر لحد ١٠.٢٪'} },
-  { img:'msg-04_handmade_canvas_art.jpg', t:{en:'Handmade canvas art',ar:'لوحات رسم يدوية'}, s:{en:'249 conversations at 4.6% CTR',ar:'٢٤٩ محادثة بنسبة نقر ٤.٦٪'} },
-  { img:'msg-07_hair_salon.jpg', t:{en:'Hair salon',ar:'كوافير'}, s:{en:'39K post engagements at 0.02 EGP each',ar:'٣٩ ألف تفاعل بـ ٠.٠٢ جنيه للتفاعل'} },
-  { img:'msg-12_page_followers.jpg', t:{en:'Page growth',ar:'زيادة متابعين'}, s:{en:'5,164 follows at 0.47 EGP each',ar:'٥١٦٤ متابعة بـ ٠.٤٧ جنيه للمتابعة'} }
+  { img:'msg-01_fabric_store_en.jpg', t:'محل أقمشة', s:'85 ألف مبيعات بـ 8.7 ألف إنفاق — أوردرات الشحن بس' },
+  { img:'msg-10_appliance_repair_summary.jpg', t:'صيانة أجهزة', s:'5,571 محادثة بـ 17 جنيه للمحادثة' },
+  { img:'msg-09_weight_loss_a.jpg', t:'مركز تخسيس', s:'4,882 محادثة على 1.5 مليون ظهور' },
+  { img:'msg-02_steel_factory_b2b.jpg', t:'مصنع حديد', s:'1,237 استفسار من تجار ومقاولين' },
+  { img:'msg-08_wedding_venue.jpg', t:'قاعة أفراح', s:'أكتر من 440 محادثة ونسبة نقر لحد 15.8%' },
+  { img:'msg-06_swimming_academy.jpg', t:'أكاديمية سباحة', s:'أكتر من 600 محادثة ونسبة نقر لحد 10.3%' },
+  { img:'msg-05_baby_beds.jpg', t:'سراير أطفال', s:'834 محادثة بـ 3.40 جنيه للمحادثة' },
+  { img:'msg-03_medical_lab.jpg', t:'معمل تحاليل', s:'562 محادثة بـ 11.1 جنيه للمحادثة' },
+  { img:'msg-11_gym.jpg', t:'جيم', s:'355 محادثة ونسبة نقر لحد 10.2%' },
+  { img:'msg-04_handmade_canvas_art.jpg', t:'لوحات رسم يدوية', s:'249 محادثة بنسبة نقر 4.6%' },
+  { img:'msg-07_hair_salon.jpg', t:'كوافير', s:'39 ألف تفاعل بـ 0.02 جنيه للتفاعل' },
+  { img:'msg-12_page_followers.jpg', t:'زيادة متابعين', s:'5,164 متابعة بـ 0.47 جنيه للمتابعة' }
 ];
 
-/* ---------- stores ---------- */
-const STORES = [
-  { kind:'ba',
-    tabs:[
-      {key:'product',label:{en:'Product page',ar:'صفحة المنتج'},screens:[['sleepwear-product-before.jpg','before'],['sleepwear-product-after.jpg','after']]},
-      {key:'home',label:{en:'Homepage',ar:'الصفحة الرئيسية'},screens:[['sleepwear-home-after.jpg','after']]},
-      {key:'collection',label:{en:'Collection page',ar:'صفحة المجموعة'},screens:[['sleepwear-collection-before.jpg','before']]}
-    ],
-    tags:{en:['Fashion','Product page rebuild'],ar:['فاشون','إعادة بناء صفحة المنتج']},
-    title:{en:'Sleepwear store, product page rebuilt',ar:'متجر ملابس بيتي، صفحة منتج جديدة'},
-    feats:{en:['The old page ended after two screens','Volume-discount slider','Bundle offer with a countdown','Stock counter and live viewer count','WhatsApp reviews and a sticky add-to-cart'],
-           ar:['القديمة كانت بتخلص بعد شاشتين','سلايدر خصم الكميات','عرض باقة بعدّاد','بار المخزون وعدد اللي بيتفرجوا','ريفيوز واتساب وزر شراء ثابت']},
-    built:{en:'Delivered in 5 days',ar:'خلصته في ٥ أيام'} },
+/* المتاجر — كارت كيس ستادي لكل واحد */
+const PROJECTS = [
+  { card:'sleepwear-product-after.jpg', dark:true, tags:['فاشون','إعادة بناء صفحة المنتج'],
+    title:'متجر ملابس بيتي — صفحة منتج مبنية للبيع',
+    problem:'صفحة المنتج كانت بتخلص بعد شاشتين: صورة وسعر وزرار. مفيش أي سبب يخلّي العميل يشتري دلوقتي مش بكرة.',
+    did:'بنيتها من أول وجديد — سلايدر خصم الكميات، عرض باقة بعدّاد تنازلي، بار المخزون وعدّاد المشاهدين، ريفيوز واتساب حقيقية، وزر شراء ثابت تحت.',
+    result:'الصفحة بقت 7 شاشات شغل بيع بدل شاشتين، واتسلّمت في 5 أيام.',
+    built:'اتسلّم في 5 أيام',
+    after:[['sleepwear-product-after.jpg','صفحة المنتج — بعد'],['sleepwear-home-after.jpg','الرئيسية — بعد']],
+    before:[['sleepwear-product-before.jpg','صفحة المنتج — قبل'],['sleepwear-collection-before.jpg','صفحة المجموعة — قبل']] },
 
-  { kind:'ba',
-    tabs:[
-      {key:'product',label:{en:'Product page',ar:'صفحة المنتج'},screens:[['kbeauty-product-before.jpg','before'],['kbeauty-product-after.jpg','after']]},
-      {key:'home',label:{en:'Homepage',ar:'الصفحة الرئيسية'},screens:[['kbeauty-home-before.jpg','before'],['kbeauty-home-after.jpg','after']]},
-      {key:'collection',label:{en:'Collection page',ar:'صفحة المجموعة'},screens:[['kbeauty-collection-before.jpg','before'],['kbeauty-collection-after.jpg','after']]}
-    ],
-    tags:{en:['Cosmetics','Full rebuild'],ar:['كوزماتكس','إعادة بناء كاملة']},
-    title:{en:'K-beauty store rebuilt to raise order value',ar:'متجر كوزماتكس لرفع قيمة الأوردر'},
-    feats:{en:['Free-shipping progress slider','Checkbox bundle at one price','Safe-payment badges','Arabic description and FAQ','Real collection pages with filters'],
-           ar:['سلايدر تقدّم الشحن المجاني','باقة بشيك بوكس بسعر واحد','أيقونات الدفع الآمن','وصف وأسئلة شائعة بالعربي','صفحات مجموعات حقيقية بفلاتر']},
-    built:{en:'Product page and storefront rebuild',ar:'إعادة بناء صفحة المنتج والواجهة'} },
+  { card:'kbeauty-home-after.jpg', dark:false, tags:['كوزماتكس','إعادة بناء كاملة'],
+    title:'متجر كوزماتكس — رفع قيمة الأوردر الواحد',
+    problem:'مكانش فيه صفحات مجموعات أصلاً، وصفحة المنتج شاشتين ونص: صورة، سعر، Add to cart، وخلاص.',
+    did:'عملت صفحات مجموعات حقيقية بفلاتر وترتيب، سلايدر بيوري العميل فاضل كام للشحن المجاني، باقة بشيك بوكس بسعر مجمّع، أيقونات الدفع الآمن، ووصف وأسئلة شائعة بالعربي.',
+    result:'صفحة المنتج بقت 7 شاشات، والسلة بقت بتشجّع العميل يزوّد عدد القطع.',
+    built:'إعادة بناء الواجهة وصفحة المنتج',
+    after:[['kbeauty-product-after.jpg','صفحة المنتج — بعد'],['kbeauty-home-after.jpg','الرئيسية — بعد'],['kbeauty-collection-after.jpg','صفحة المجموعة — بعد']],
+    before:[['kbeauty-product-before.jpg','صفحة المنتج — قبل'],['kbeauty-home-before.jpg','الرئيسية — قبل'],['kbeauty-collection-before.jpg','التصنيفات — قبل']] },
 
-  { kind:'ba',
-    tabs:[
-      {key:'product',label:{en:'Product page',ar:'صفحة المنتج'},screens:[['accessories-product-before.jpg','before'],['accessories-product-after.jpg','after']]},
-      {key:'home',label:{en:'Homepage',ar:'الصفحة الرئيسية'},screens:[['accessories-home-before.jpg','before'],['accessories-home-after.jpg','after']]},
-      {key:'collection',label:{en:'Collection page',ar:'صفحة المجموعة'},screens:[['accessories-collection-before.jpg','before'],['accessories-collection-after.jpg','after']]}
-    ],
-    tags:{en:['Fashion','Rebrand + rebuild'],ar:['فاشون','ريبراند وإعادة بناء']},
-    title:{en:'Accessories brand, from clutter to one system',ar:'براند إكسسوارات، من الزحمة لنظام واحد'},
-    feats:{en:['One palette across every section','Brand tabs in the grid','Bundle block on the product page','Branch cards instead of raw maps'],
-           ar:['نفس البالتة في كل سكشن','تابات البراندات في الجريد','بلوك الباقات في صفحة المنتج','كروت الفروع بدل الخرايط الملزوقة']},
-    built:{en:'Rebrand and rebuild',ar:'ريبراند وإعادة بناء'} },
+  { card:'accessories-product-after.jpg', dark:true, tags:['فاشون','ريبراند وإعادة بناء'],
+    title:'براند إكسسوارات — من الزحمة لنظام واحد',
+    problem:'الصفحة الرئيسية كانت مخلوطة: بانر نيون جنب تايلز باستيل جنب خرايط جوجل ملزوقة زي ما هي. والأسعار في الجريد بألوان مختلفة في نفس الكارت.',
+    did:'وحّدت الهوية في كل سكشن، عملت تابات للبراندات في الجريد، بلوك باقة في صفحة المنتج بسعر مجمّع، وكروت فروع بعناوين ومواعيد بدل الخرايط.',
+    result:'المتجر بقى متناسق من أوله لآخره، والعين بقت تروح على الزرار مش على الزحمة.',
+    built:'ريبراند وإعادة بناء',
+    after:[['accessories-product-after.jpg','صفحة المنتج — بعد'],['accessories-home-after.jpg','الرئيسية — بعد'],['accessories-collection-after.jpg','جريد الشنط — بعد']],
+    before:[['accessories-product-before.jpg','صفحة المنتج — قبل'],['accessories-home-before.jpg','الرئيسية — قبل'],['accessories-collection-before.jpg','جريد الشنط — قبل']] },
 
-  { kind:'ba',
-    tabs:[
-      {key:'product',label:{en:'Product page',ar:'صفحة المنتج'},screens:[['pajamas-product-before.jpg','before'],['pajamas-product-after.jpg','after']]},
-      {key:'home',label:{en:'Homepage',ar:'الصفحة الرئيسية'},screens:[['pajamas-home-before.jpg','before'],['pajamas-home-after.jpg','after']]},
-      {key:'collection',label:{en:'Collection page',ar:'صفحة المجموعة'},screens:[['pajamas-collection-before.jpg','before'],['pajamas-collection-after.jpg','after']]}
-    ],
-    tags:{en:['Fashion','Mobile-first rebuild'],ar:['فاشون','إعادة بناء للموبايل']},
-    title:{en:'Pajama brand rebuilt for mobile',ar:'براند بيجامات مظبوط للموبايل'},
-    feats:{en:['Weight-range size buttons','Sticky bottom navigation','Stock counters on product pages','Real WhatsApp reviews'],
-           ar:['أزرار مقاسات بالوزن','شريط ملاحة ثابت تحت','بار مخزون في صفحات المنتج','ريفيوز واتساب حقيقية']},
-    built:{en:'Rebuild',ar:'إعادة بناء'} },
+  { card:'gadgets-home-new.jpg', dark:false, tags:['أجهزة كهربائية · السعودية','من الصفر'],
+    title:'متجر أجهزة كهربائية — اتبنى من الصفر',
+    problem:'براند سعودي جديد، مفيش متجر خالص، وعايز يبدأ إعلانات على طول.',
+    did:'بنيت متجر عربي كامل: أقسام بأيقونات، كاروسيل الأكثر مبيعًا، صف ضمانات، سكشن تقييمات، شريط ملاحة ثابت تحت، وصفحة منتج بجدول مواصفات كامل وأسئلة شائعة وبار مخزون.',
+    result:'متجر جاهز يستقبل إعلانات من أول يوم، بالريال وبالعربي بالكامل.',
+    built:'من الصفر',
+    after:[['gadgets-home-new.jpg','الرئيسية'],['gadgets-product-new.jpg','صفحة المنتج']], before:[] },
 
-  { kind:'ba',
-    tabs:[
-      {key:'product',label:{en:'Product page',ar:'صفحة المنتج'},screens:[['modest-product-before.jpg','before'],['modest-product-after.jpg','after']]},
-      {key:'home',label:{en:'Homepage',ar:'الصفحة الرئيسية'},screens:[['modest-home-before.jpg','before'],['modest-home-after.jpg','after']]},
-      {key:'collection',label:{en:'Collection page',ar:'صفحة المجموعة'},screens:[['modest-collection-before.jpg','before'],['modest-collection-after.jpg','after']]}
-    ],
-    tags:{en:['Fashion','Rebuild + social proof'],ar:['فاشون','إعادة بناء وإثبات']},
-    title:{en:'Modest fashion store rebuilt around proof',ar:'متجر أزياء محتشمة مبني على الإثبات'},
-    feats:{en:['Live purchase notifications','Viewer counter and stock urgency','Weight-based size buttons','Four-point trust row'],
-           ar:['إشعارات شراء وانت بتتصفح','عدّاد مشاهدين وبار مخزون','أزرار مقاسات بالوزن','صف ضمانات من ٤ نقاط']},
-    built:{en:'Rebuild',ar:'إعادة بناء'} },
+  { card:'coffee-b-home-new.jpg', dark:true, tags:['مستلزمات قهوة','من الصفر'],
+    title:'متجر أدوات قهوة — سلة بتزوّد عدد القطع',
+    problem:'براند لسه بيبدأ، وعايز العميل ياخد أكتر من قطعة في الأوردر الواحد مش قطعة وخلاص.',
+    did:'عملت سلة بتوري العميل فاضل كام للشحن المجاني، وبعدها لخصم 10%، وبعدها لـ 20%. وباقة "بيتشتروا مع بعض" بسعر واحد في صفحة المنتج.',
+    result:'اتسلّم من الصفر في 4 أيام، والسلة مصمّمة تزوّد متوسط قيمة الأوردر.',
+    built:'من الصفر في 4 أيام',
+    after:[['coffee-b-home-new.jpg','الرئيسية'],['coffee-b-product-new.jpg','صفحة المنتج والسلة']], before:[] },
 
-  { kind:'new',
-    tabs:[
-      {key:'home',label:{en:'Homepage',ar:'الصفحة الرئيسية'},screens:[['gadgets-home-new.jpg','new']]},
-      {key:'product',label:{en:'Product page',ar:'صفحة المنتج'},screens:[['gadgets-product-new.jpg','new']]}
-    ],
-    tags:{en:['Home appliances · Saudi','Built from scratch'],ar:['أجهزة كهربائية · السعودية','من الصفر']},
-    title:{en:'Appliance store built from scratch',ar:'متجر أجهزة كهربائية من الصفر'},
-    feats:{en:['Arabic storefront, category tiles','Best-seller carousel','Trust row and review section','Full spec table and FAQ','Sticky bottom navigation'],
-           ar:['متجر عربي بأقسام وأيقونات','كاروسيل الأكثر مبيعًا','صف الضمانات وسكشن التقييمات','جدول مواصفات كامل وأسئلة شائعة','شريط ملاحة ثابت تحت']},
-    built:{en:'Built from scratch',ar:'من الصفر'} },
+  { card:'dresses-product-new.jpg', dark:false, tags:['فاشون','من الصفر'],
+    title:'متجر مصنع فساتين — أسعار على حسب الكمية',
+    problem:'مصنع بيبيع بالجملة والقطاعي، ومحتاج المتجر يشجّع على الكميات من غير ما يتكلم مع حد.',
+    did:'عملت 6 مستويات سعر حسب الكمية في صفحة المنتج (من قطعة لـ 6 قطع)، اختيار الألوان بسواتش، بار مخزون وعدّاد مشاهدين، وصف ضمانات عن الدفع عند الاستلام والسعر من المصنع.',
+    result:'سلم الكميات بيخلّي العميل ياخد أكتر من قطعة في الأوردر الواحد، وده بيرفع الربح للبيزنس.',
+    built:'من الصفر',
+    after:[['dresses-home-new.jpg','الرئيسية'],['dresses-product-new.jpg','صفحة المنتج']], before:[] },
 
-  { kind:'new',
-    tabs:[
-      {key:'home',label:{en:'Homepage',ar:'الصفحة الرئيسية'},screens:[['coffee-b-home-new.jpg','new']]},
-      {key:'product',label:{en:'Product page',ar:'صفحة المنتج'},screens:[['coffee-b-product-new.jpg','new']]}
-    ],
-    tags:{en:['Coffee supplies','Built from scratch'],ar:['مستلزمات قهوة','من الصفر']},
-    title:{en:'Coffee store with a spend-tier cart',ar:'متجر قهوة بسلة بتشجّع على الزيادة'},
-    feats:{en:['Free shipping, then 10%, then 20% off tiers','\"Bought together\" bundle at one price','Stock bar and viewer counter','Arabic reviews section'],
-           ar:['مراحل: شحن مجاني، بعدين ١٠٪، بعدين ٢٠٪','باقة \"بيتشتروا مع بعض\" بسعر واحد','بار المخزون وعدّاد المشاهدين','سكشن آراء العملاء']},
-    built:{en:'Built from scratch in 4 days',ar:'من الصفر في ٤ أيام'} },
+  { card:'pajamas-product-after.jpg', dark:true, tags:['فاشون','إعادة بناء للموبايل'],
+    title:'براند بيجامات — مظبوط لمتسوقي الموبايل',
+    problem:'المقاسات كانت في قايمة منسدلة والعميل على الموبايل بيتوه فيها، ومفيش شريط ملاحة ثابت يرجّعه للسلة.',
+    did:'حوّلت المقاسات لأزرار بالوزن (من 50 لـ 100 كيلو)، ضفت شريط ملاحة ثابت تحت، بار مخزون في صفحات المنتج، وريفيوز واتساب حقيقية.',
+    result:'التصفّح على الموبايل بقى أسهل، وعدد الخطوات لحد الشراء قلّ.',
+    built:'إعادة بناء',
+    after:[['pajamas-product-after.jpg','صفحة المنتج — بعد'],['pajamas-home-after.jpg','الرئيسية — بعد'],['pajamas-collection-after.jpg','جريد المنتجات — بعد']],
+    before:[['pajamas-product-before.jpg','صفحة المنتج — قبل'],['pajamas-home-before.jpg','الرئيسية — قبل'],['pajamas-collection-before.jpg','جريد المنتجات — قبل']] },
 
-  { kind:'new',
-    tabs:[
-      {key:'home',label:{en:'Homepage',ar:'الصفحة الرئيسية'},screens:[['dresses-home-new.jpg','new']]},
-      {key:'product',label:{en:'Product page',ar:'صفحة المنتج'},screens:[['dresses-product-new.jpg','new']]}
-    ],
-    tags:{en:['Fashion','Built from scratch'],ar:['فاشون','من الصفر']},
-    title:{en:'Dress factory store with volume pricing',ar:'متجر مصنع فساتين بأسعار الكميات'},
-    feats:{en:['Six quantity tiers on the product page','Colour swatches','Stock bar and viewer counter','Cash-on-delivery trust row'],
-           ar:['٦ مستويات سعر حسب الكمية','اختيار الألوان بسواتش','بار المخزون وعدّاد المشاهدين','صف ضمانات للدفع عند الاستلام']},
-    built:{en:'Built from scratch',ar:'من الصفر'} },
+  { card:'coffee-a-home-new.jpg', dark:false, tags:['مستلزمات قهوة','إعادة تصميم'],
+    title:'براند قهوة — إعادة تصميم حوالين حكايته',
+    problem:'البراند شغال من 2009 وليه اسم، بس المتجر شكله عادي ومش بيحكي القصة دي ولا بيبيع أكتر من منتج في المرة.',
+    did:'هوية غامقة أنيقة، سكشن لحكاية البراند، باقة "شراء جميعها معًا" بشيك بوكس في صفحة المنتج، بار مخزون وعدّاد مشاهدين، وصف أيقونات الدفع الآمن.',
+    result:'المتجر بقى شكله براند مش محل، وصفحة المنتج بقت بتعرض أكتر من منتج في المرة.',
+    built:'إعادة تصميم',
+    after:[['coffee-a-home-new.jpg','الرئيسية'],['coffee-a-product-new.jpg','صفحة المنتج']], before:[] },
 
-  { kind:'new',
-    tabs:[
-      {key:'home',label:{en:'Homepage',ar:'الصفحة الرئيسية'},screens:[['coffee-a-home-new.jpg','new']]},
-      {key:'product',label:{en:'Product page',ar:'صفحة المنتج'},screens:[['coffee-a-product-new.jpg','new']]}
-    ],
-    tags:{en:['Coffee supplies','Redesign'],ar:['مستلزمات قهوة','إعادة تصميم']},
-    title:{en:'Coffee brand redesign',ar:'إعادة تصميم براند قهوة'},
-    feats:{en:['Dark editorial storefront','Brand-story section','\"Buy them all together\" bundle','Payment-badge row'],
-           ar:['هوية غامقة أنيقة','سكشن حكاية البراند','باقة \"شراء جميعها معًا\"','صف أيقونات الدفع الآمن']},
-    built:{en:'Redesign',ar:'إعادة تصميم'} }
+  { card:'modest-product-after.jpg', dark:true, tags:['فاشون','إعادة بناء وإثبات'],
+    title:'متجر أزياء محتشمة — مبني على الإثبات',
+    problem:'المتجر كان شغال، بس مفيش حاجة تخلّي العميل يحس إن المنتج مطلوب ولا إن فيه سبب يستعجل.',
+    did:'إشعارات شراء بتظهر وانت بتتصفح، عدّاد مشاهدين، بار مخزون، أزرار مقاسات بالوزن، وصف ضمانات من 4 نقاط.',
+    result:'بقى فيه إثبات اجتماعي في كل خطوة. (البراند غيّر اسمه التجاري بعد التسليم بشهر — نفس المتجر.)',
+    built:'إعادة بناء',
+    after:[['modest-product-after.jpg','صفحة المنتج — بعد'],['modest-home-after.jpg','الرئيسية — بعد'],['modest-collection-after.jpg','جريد المنتجات — بعد']],
+    before:[['modest-product-before.jpg','صفحة المنتج — قبل'],['modest-home-before.jpg','الرئيسية — قبل'],['modest-collection-before.jpg','جريد المنتجات — قبل']] }
 ];
 
-/* ---------- Arabic copy (Egyptian, plain) ---------- */
-const T = { en:{}, ar:{
-  nav1:'الخدمات', nav2:'نتايج الإعلانات', nav3:'متاجر شوبيفاي', nav4:'بنشتغل إزاي', nav5:'تواصل', nav0:'الرئيسية',
-  cta1:'احجز مكالمة', cta2:'كلمني واتساب', cta3:'شوف النتايج',
-  role:'ميديا باير ومطوّر متاجر شوبيفاي',
-  h1:'أظبطلك المتجر — وأجيبلك الأوردرات.',
-  lede:'بشتغل إعلانات ميتا وببني متاجر شوبيفاي لبراندات في مصر والخليج. وكل اللي تحت ده صور حقيقية من مدير الإعلانات ومن المتجر نفسه.',
-  s1:'أعلى ROAS في يوم', s2:'جنيه مبيعات في شهر', s3:'أوردر في نفس الشهر', s4:'متاجر عملتها',
-  svcTitle:'مهارتين بيكملوا بعض', svcSub:'اشتغل معايا في جزء واحد، أو سلّمني الاتنين — من بناء المتجر لتوسيع الحملات.',
-  svcA:'الميديا باينج',
-  svcA1:'حملات بيع (Conversion) للمتاجر',
-  svcA2:'حملات رسايل للخدمات والمحلات',
-  svcA3:'تظبيط البيكسل والـ CAPI والأحداث',
-  svcA4:'تجريب كرياتيف وجماهير، وبعدها توسيع',
-  svcA5:'تقرير كل أسبوع بسيط وتفهمه',
-  svcB:'تطوير شوبيفاي',
-  svcB1:'بناء متجر كامل من الصفر',
-  svcB2:'تركيب الثيم وتظبيطه (Kalles وغيره)',
-  svcB3:'إعادة بناء صفحة المنتج علشان تبيع',
-  svcB4:'التطبيقات والدفع والشحن والدفع عند الاستلام',
-  svcB5:'تسريع المتجر وتحسين التحويل',
-  bigA:'نتايج الإعلانات', bigAd:'٨ كيس ستاديز بالأرقام والصور من مدير الإعلانات، وحملات رسايل في ١١ مجال.',
-  bigB:'متاجر شوبيفاي', bigBd:'٩ متاجر — تقدر تسكرول جوه شاشة الموبايل وتشوف كل صفحة بالكامل.',
-  goA:'شوف النتايج →', goB:'شوف المتاجر →',
-  adsTitle:'نتايج، حملة حملة',
-  adsSub:'كل كارت ده حملة أو فترة لوحدها، مش مجموع. والصور من مدير الإعلانات ومن لوحة المتجر. أسامي العملاء مستخبية.',
-  msgTitle:'حملات رسايل في ١١ مجال',
-  msgSub:'خدمات ومحلات. كل كارت حملة لوحدها بتكلفة المحادثة بتاعتها.',
-  stTitle:'متاجر عملتها على شوبيفاي',
-  stSub:'اختار الصفحة اللي عايز تشوفها — الموبايلين يتحولوا عليها. واسحب جوه الشاشة بإيدك، ولو سيبتها بتكمل لوحدها.',
-  hint:'اسحب لتحت', expand:'تكبير',
-  prTitle:'بنشتغل إزاي',
-  p1t:'أراجع', p1b:'أبص على المتجر وحساب الإعلانات والتتبع، وأقولك إيه اللي بيضيّع فلوس.',
-  p2t:'أبني', p2b:'أظبط المتجر أو صفحة المنتج، وأركّب البيكسل والأحداث صح، وأجهّز العروض والباقات.',
-  p3t:'أطلق وأجرّب', p3b:'أجرّب جماهير وكرياتيف وعروض ضد بعضها لحد ما الأرقام تستقر.',
-  p4t:'أوسّع', p4b:'أزوّد الميزانية على اللي شغال، وأخلي تكلفة الأوردر ثابتة، وأبعتلك تقرير كل أسبوع.',
-  coTitle:'تحب نكبّر متجرك؟', coBody:'ابعتلي لينك متجرك وأرقامك الحالية، وهقولك بصراحة أقدر أساعدك ولا لأ، وإزاي.',
-  waBtn:'ابعتلي ويلا نكبر مع بعض 🔥', waBubble:'جاهز نكبر شغلك؟ ابعتلي رسالة 👋',
-  foot:'ميديا باير ومطوّر شوبيفاي — القاهرة، مصر',
-  adsHeadTitle:'نتايج الإعلانات', adsHeadSub:'كل كيس ستادي هنا حملة أو فترة لوحدها، بالصور من مدير الإعلانات ومن لوحة المتجر.',
-  stHeadTitle:'متاجر شوبيفاي', stHeadSub:'٩ متاجر بنيتها أو أعدت بناءها. اختار الصفحة الرئيسية أو صفحة المنتج أو صفحة المجموعة، واسحب جوه الشاشة تشوفها كلها.'
-}};
+/* ============================================================
+   الرسم
+   ============================================================ */
+const $ = s => document.querySelector(s);
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ---------- renderers ---------- */
-function renderCases(lang){
-  const el = document.getElementById('caseList'); if(!el) return;
+/* ---------- (ب) النتيجة الكبيرة ---------- */
+let hi = Math.floor(Math.random() * HIGHLIGHTS.length);
+function paintHighlight(animate){
+  const box = $('#bigStat'); if(!box) return;
+  const h = HIGHLIGHTS[hi];
+  box.querySelector('.count').textContent =
+    String(hi+1).padStart(2,'0') + ' / ' + String(HIGHLIGHTS.length).padStart(2,'0');
+  box.querySelector('.unit').textContent = h.unit;
+  box.querySelector('.what').textContent = h.what;
+  box.querySelector('.meta').textContent = h.meta;
+  const fig = box.querySelector('.fig');
+  if(animate === false || reduce){ fig.textContent = h.fig; }
+  else countUp(fig, h.fig);
+}
+function moveHighlight(step){
+  const box = $('#bigStat'); if(!box) return;
+  hi = (hi + step + HIGHLIGHTS.length) % HIGHLIGHTS.length;
+  box.classList.add('fading');
+  setTimeout(()=>{ paintHighlight(true); box.classList.remove('fading'); }, 300);
+}
+
+/* ---------- كيس ستادي الإعلانات ---------- */
+function renderCases(){
+  const el = $('#caseList'); if(!el) return;
   el.innerHTML = CASES.map(c=>`
     <article class="case${c.dark?'':' light'}">
       <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between">
-        <span class="pill tag">${c.tag[lang]}</span><span class="per">${c.per[lang]}</span>
+        <span class="pill tag">${c.tag}</span><span class="per">${c.per}</span>
       </div>
-      <h3>${c.title[lang]}</h3>
-      <p>${c.body[lang]}</p>
-      <div class="kpis">${c.kpis.map(k=>`<div class="kpi"><b>${k[0]}</b><span>${k[1][lang]}</span></div>`).join('')}</div>
-      <div class="shots">${c.shots.map(s=>`<div class="shot" data-full="assets/img/${s}"><img src="assets/img/${s}" alt="" loading="lazy"></div>`).join('')}</div>
+      <h3>${c.title}</h3>
+      <p>${c.body}</p>
+      <div class="kpis">${c.kpis.map(k=>`<div class="kpi"><b class="ltr">${k[0]}</b><span>${k[1]}</span></div>`).join('')}</div>
+      <div class="shots">${c.shots.map(s=>
+        `<div class="shot" data-one="assets/img/${s}"><img src="assets/img/${s}" alt="" loading="lazy"></div>`).join('')}</div>
     </article>`).join('');
 }
 
-function renderMsgs(lang){
-  const el = document.getElementById('msgGrid'); if(!el) return;
+function renderMsgs(){
+  const el = $('#msgGrid'); if(!el) return;
   el.innerHTML = MSGS.map(m=>`
-    <div class="msg" data-full="assets/img/${m.img}">
+    <div class="msg" data-one="assets/img/${m.img}">
       <img src="assets/img/${m.img}" alt="" loading="lazy">
-      <div>${m.t[lang]}<small>${m.s[lang]}</small></div>
+      <div>${m.t}<small>${m.s}</small></div>
     </div>`).join('');
 }
 
-function renderStores(lang){
-  const el = document.getElementById('storeList'); if(!el) return;
-  const L = {
-    before:{en:'BEFORE',ar:'قبل'}, after:{en:'AFTER',ar:'بعد'}, new:{en:'BUILT BY ME',ar:'من تنفيذي'},
-    hint:{en:'Scroll inside',ar:'اسحب لتحت'}, exp:{en:'Expand',ar:'تكبير'}
-  };
-  el.innerHTML = STORES.map((s,si)=>`
-    <article class="store">
-      <div class="screens-col">
-        ${s.tabs.length>1 ? `<div class="tabs" role="tablist">${s.tabs.map((t,ti)=>
-          `<button class="tab${ti===0?' on':''}" data-store="${si}" data-tab="${t.key}">${t.label[lang]}</button>`).join('')}</div>` : ''}
-        ${s.tabs.map((t,ti)=>`
-          <div class="phones${ti===0?' on':''}" data-store="${si}" data-panel="${t.key}">
-            ${t.screens.map(([img,kind])=>`
-              <div class="phone-wrap">
-                <span class="phone-label ${kind}">${L[kind][lang]}</span>
-                <div class="phone">
-                  <div class="scroll"><img src="assets/img/${img}" alt="${L[kind][lang]}" loading="lazy"></div>
-                  <button class="expand" data-full="assets/img/${img}" aria-label="${L.exp[lang]}">⤢</button>
-                  <span class="hint">${L.hint[lang]}</span>
-                </div>
-              </div>`).join('')}
-          </div>`).join('')}
+/* ---------- كروت المتاجر ---------- */
+function renderProjects(){
+  const el = $('#projList'); if(!el) return;
+  el.innerHTML = PROJECTS.map((p,i)=>`
+    <article class="proj${p.dark?' dark':''}">
+      <div class="pr-shell">
+        <div class="pr-pic"><img src="assets/img/${p.card}" alt="${p.title}" loading="lazy"></div>
       </div>
-      <div>
-        <div class="tags">${s.tags[lang].map(t=>`<span class="pill tag">${t}</span>`).join('')}</div>
-        <h3 style="margin-top:14px">${s.title[lang]}</h3>
-        <ul class="feats">${s.feats[lang].map(f=>`<li>${f}</li>`).join('')}</ul>
-        <div class="built">${s.built[lang]}</div>
+      <div class="pr-body">
+        <div class="tags">${p.tags.map(t=>`<span class="pill tag">${t}</span>`).join('')}</div>
+        <h3>${p.title}</h3>
+        <div class="pr-rows">
+          <div class="pr-row"><b>المشكلة</b><p>${p.problem}</p></div>
+          <div class="pr-row"><b>عملت إيه</b><p>${p.did}</p></div>
+          <div class="pr-row"><b>النتيجة</b><p>${p.result}</p></div>
+        </div>
+        <div class="pr-actions">
+          <button class="main" data-gal="${i}" data-set="after">شوف الصفحات كاملة</button>
+          ${p.before.length ? `<button data-gal="${i}" data-set="before">شوف النسخة القديمة</button>` : ''}
+        </div>
+        <div class="pr-meta">${p.built}</div>
       </div>
     </article>`).join('');
-
-  el.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{
-    const si=btn.dataset.store, key=btn.dataset.tab;
-    el.querySelectorAll(`.tab[data-store="${si}"]`).forEach(b=>b.classList.toggle('on', b===btn));
-    el.querySelectorAll(`.phones[data-store="${si}"]`).forEach(p=>p.classList.toggle('on', p.dataset.panel===key));
-    initPhones();
-  }));
-
-  initPhones();
 }
 
-/* ---------- language ---------- */
-const EN = {};
-document.querySelectorAll('[data-i18n]').forEach(el=>EN[el.dataset.i18n]=el.innerHTML);
-document.querySelectorAll('[data-i18n-html]').forEach(el=>EN[el.dataset.i18nHtml]=el.innerHTML);
-
-function setLang(lang){
-  const html=document.documentElement;
-  html.lang=lang; html.dir = lang==='ar' ? 'rtl':'ltr';
-  try{ localStorage.setItem('lang',lang); }catch(e){}
-  const dict = lang==='ar' ? T.ar : EN;
-  document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(dict[k]) el.innerHTML=dict[k]; });
-  document.querySelectorAll('[data-i18n-html]').forEach(el=>{ const k=el.dataset.i18nHtml; if(dict[k]) el.innerHTML=dict[k]; });
-  const b=document.getElementById('lang'); if(b) b.textContent = lang==='ar' ? 'English' : 'العربية';
-  renderCases(lang); renderMsgs(lang); renderStores(lang);
-  document.querySelectorAll('.stat .num').forEach(el=>{ delete el.dataset.done; });
-  initFX();
+/* ---------- لايت بوكس بمعرض ---------- */
+let gal = [], gi = 0;
+function openGal(list, start){
+  gal = list; gi = start || 0;
+  paintGal();
+  $('#lb').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+function paintGal(){
+  const [img,label] = gal[gi];
+  $('#lbImg').src = img.indexOf('assets/') === 0 ? img : 'assets/img/' + img;
+  $('#lbCap').innerHTML = gal.length > 1
+    ? `${label} &nbsp;·&nbsp; <span class="ltr">${gi+1} / ${gal.length}</span> &nbsp;—&nbsp; اسحب لتحت تشوف الصفحة كلها`
+    : (label ? `${label} &nbsp;—&nbsp; اسحب لتحت تشوف الصفحة كلها` : 'اسحب لتحت تشوف الصفحة كلها');
+  $('#lbNav').style.display = gal.length > 1 ? 'flex' : 'none';
+}
+function moveGal(step){
+  if(gal.length < 2) return;
+  gi = (gi + step + gal.length) % gal.length;
+  paintGal();
+  $('#lb').scrollTop = 0;
+}
+function closeLb(){
+  $('#lb').classList.remove('on');
+  document.body.style.overflow = '';
 }
 
-/* ---------- lightbox ---------- */
-const lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg');
-document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-full]'); if(!t) return;
-  lbImg.src=t.dataset.full; lb.classList.add('on'); document.body.style.overflow='hidden';
-});
-function closeLb(){ lb.classList.remove('on'); document.body.style.overflow=''; }
-if(lb){
-  lb.addEventListener('click',e=>{ if(e.target!==lbImg) closeLb(); });
-  document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLb(); });
-}
-
-/* ---------- scrollable phone mockups ----------
-   The visitor can scroll inside the screen. If they stop, it keeps
-   scrolling on its own; when it reaches the end it goes back up.        */
-const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-let phoneObs;
-function initPhones(){
-  const phones = document.querySelectorAll('.phone');
-  if(!phones.length) return;
-  if(phoneObs) phoneObs.disconnect();
-  phoneObs = new IntersectionObserver(es=>es.forEach(e=>{
-    const st = e.target._auto;
-    if(!st) return;
-    st.visible = e.isIntersecting;
-  }), {threshold:.3});
-
-  phones.forEach(ph=>{
-    const sc = ph.querySelector('.scroll');
-    if(!sc || ph._auto) { if(ph._auto) phoneObs.observe(ph); return; }
-    const st = { visible:false, paused:reduce, dir:1, idle:null };
-    ph._auto = st;
-
-    const pause = () => {
-      st.paused = true;
-      ph.classList.add('touched');
-      clearTimeout(st.idle);
-      st.idle = setTimeout(()=>{ st.paused = reduce; }, 2600);
-    };
-    ['pointerdown','wheel','touchstart','touchmove'].forEach(ev=>sc.addEventListener(ev,pause,{passive:true}));
-    ph.addEventListener('mouseenter',()=>{ st.paused=true; clearTimeout(st.idle); });
-    ph.addEventListener('mouseleave',()=>{ clearTimeout(st.idle); st.idle=setTimeout(()=>{ st.paused=reduce; },600); });
-
-    phoneObs.observe(ph);
-
-    (function step(){
-      if(st.visible && !st.paused){
-        const max = sc.scrollHeight - sc.clientHeight;
-        if(max > 10){
-          sc.scrollTop += 0.55 * st.dir;
-          if(sc.scrollTop >= max - 1) st.dir = -1;
-          if(sc.scrollTop <= 0) st.dir = 1;
-        }
-      }
-      requestAnimationFrame(step);
-    })();
-  });
-}
-
-/* ---------- reveal + counters ---------- */
-function countUp(el){
-  const raw = el.dataset.target || el.textContent.trim();
-  el.dataset.target = raw;
-  const m = raw.match(/^([\d.,]+)(.*)$/); if(!m) return;
+/* ---------- عدّاد الأرقام ---------- */
+function countUp(el, target){
+  const raw = target != null ? String(target) : (el.dataset.target || el.textContent.trim());
+  if(target == null) el.dataset.target = raw;
+  const m = raw.match(/^([\d.,]+)(.*)$/);
+  if(!m){ el.textContent = raw; return; }
   const clean = m[1].replace(/,/g,'');
   const end = parseFloat(clean), suffix = m[2], dec = (clean.split('.')[1]||'').length;
-  const grouped = m[1].includes(','), dur = 1100, t0 = performance.now();
+  const grouped = m[1].indexOf(',') > -1, dur = 1100, t0 = performance.now();
   (function step(t){
     const p = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-p,3), v = end*e;
     el.textContent = (grouped ? Math.round(v).toLocaleString('en-US') : v.toFixed(dec)) + suffix;
     if(p<1) requestAnimationFrame(step); else el.textContent = raw;
   })(performance.now());
 }
+
+/* ---------- الظهور بالسكرول ---------- */
 let io;
 function initFX(){
   if(reduce) return;
@@ -410,20 +299,42 @@ function initFX(){
       const el = en.target;
       if(el.classList.contains('num') && !el.dataset.done){ el.dataset.done='1'; countUp(el); }
       else {
-        const sibs = el.parentElement ? [...el.parentElement.children] : [el];
+        const sibs = el.parentElement ? [].slice.call(el.parentElement.children) : [el];
         el.style.transitionDelay = (Math.min(sibs.indexOf(el),5) * 90) + 'ms';
         el.classList.add('in');
       }
     });
   }, {threshold:.25, rootMargin:'0px 0px -8% 0px'});
-  document.querySelectorAll('.sec-head h2, .hero h1, .page-head h1, .stat, .stat .num, .kpi').forEach(el=>io.observe(el));
+  document.querySelectorAll('.sec-head h2, .hero h1, .page-head h1, .stat, .stat .num, .kpi')
+    .forEach(el=>io.observe(el));
 }
 
-/* ---------- boot ---------- */
-const hdr=document.querySelector('header');
-if(hdr) addEventListener('scroll',()=>{ hdr.classList.toggle('small', scrollY>120); },{passive:true});
+/* ---------- التشغيل ---------- */
+document.addEventListener('click', e=>{
+  const one = e.target.closest('[data-one]');
+  if(one){ openGal([[one.dataset.one, '']], 0); return; }
+  const g = e.target.closest('[data-gal]');
+  if(g){
+    const p = PROJECTS[+g.dataset.gal];
+    openGal(g.dataset.set === 'before' ? p.before : p.after, 0);
+    return;
+  }
+  if(e.target.closest('#lbNext')){ moveGal(1); return; }
+  if(e.target.closest('#lbPrev')){ moveGal(-1); return; }
+  if(e.target.closest('#hiNext')){ moveHighlight(1); return; }
+  if(e.target.closest('#hiPrev')){ moveHighlight(-1); return; }
+  if(e.target.closest('#lbClose') || (e.target.id === 'lb')) closeLb();
+});
+document.addEventListener('keydown', e=>{
+  if(!$('#lb') || !$('#lb').classList.contains('on')) return;
+  if(e.key === 'Escape') closeLb();
+  if(e.key === 'ArrowLeft') moveGal(1);
+  if(e.key === 'ArrowRight') moveGal(-1);
+});
 
-let saved='en';
-try{ saved = localStorage.getItem('lang') || 'en'; }catch(e){}
-if(saved==='ar'){ setLang('ar'); }
-else { renderCases('en'); renderMsgs('en'); renderStores('en'); initFX(); }
+const hdr = document.querySelector('header');
+if(hdr) addEventListener('scroll', ()=>{ hdr.classList.toggle('small', scrollY > 120); }, {passive:true});
+
+renderCases(); renderMsgs(); renderProjects();
+paintHighlight(true);
+initFX();
